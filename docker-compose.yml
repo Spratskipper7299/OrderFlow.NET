@@ -1,0 +1,95 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: orderflow-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "OrderFlow_Dev_123"
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P OrderFlow_Dev_123 -C -Q 'SELECT 1' || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: orderflow-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: orderflow-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  order-api:
+    image: orderflow-order-api
+    container_name: orderflow-order-api
+    build:
+      context: .
+      dockerfile: src/OrderFlow.Order.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - ConnectionStrings__OrderDb=Server=sqlserver,1433;Database=OrderDb;User Id=sa;Password=OrderFlow_Dev_123;TrustServerCertificate=True;
+      - ConnectionStrings__RabbitMq=amqp://guest:guest@rabbitmq:5672
+      - ConnectionStrings__Redis=redis:6379
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  inventory-worker:
+    image: orderflow-inventory-worker
+    container_name: orderflow-inventory-worker
+    build:
+      context: .
+      dockerfile: src/OrderFlow.Inventory.Worker/Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - ConnectionStrings__InventoryDb=Server=sqlserver,1433;Database=InventoryDb;User Id=sa;Password=OrderFlow_Dev_123;TrustServerCertificate=True;
+      - ConnectionStrings__RabbitMq=amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  payment-worker:
+    image: orderflow-payment-worker
+    container_name: orderflow-payment-worker
+    build:
+      context: .
+      dockerfile: src/OrderFlow.Payment.Worker/Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - ConnectionStrings__PaymentDb=Server=sqlserver,1433;Database=PaymentDb;User Id=sa;Password=OrderFlow_Dev_123;TrustServerCertificate=True;
+      - ConnectionStrings__RabbitMq=amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+volumes:
+  sqlserver-data:
